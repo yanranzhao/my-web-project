@@ -25,5 +25,6 @@ export class PostCreateComponent {
     }
     const post: Post = { title: form.value.title, content: form.value.content };
     this.postsService.addPost(form.value.title, form.value.content);
+    form.resetForm();
   }
 }
