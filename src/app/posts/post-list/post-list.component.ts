@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../post.model';
+import { PostsService } from '../posts.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-list',
@@ -8,7 +10,7 @@ import { Post } from '../post.model';
 })
 
 
-export class PostListComponent {
+export class PostListComponent implements OnInit, OnDestroy {
   // array, but need to loop it
   // posts = [
   //   {title: 'First post', content: 'This is the first content'},
@@ -17,5 +19,28 @@ export class PostListComponent {
   // ];
 
   // get data by user input
-  @Input() posts: Post[] = [];
+  posts: Post[] = [];
+  private postsSub: Subscription;
+
+  // postsService: PostsService;
+  // constructor(postsService: PostsService) {
+  //   this.postsService = postsService;
+  // }
+
+  constructor(public postsService: PostsService) {}
+
+  // update posts when receive new posts
+  ngOnInit() {
+    this.posts = this.postsService.getPosts();
+    this.postsSub = this.postsService.getPostUpdateListener()
+      .subscribe((posts: Post[]) => {
+        this.posts = posts;
+    });
+  }
+
+  // remvoe the subscription and revent memory leaks
+  ngOnDestroy() {
+    this.postsSub.unsubscribe();
+  }
+
 }
