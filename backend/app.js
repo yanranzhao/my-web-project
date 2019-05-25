@@ -46,7 +46,6 @@ app.get( "/api/posts", (req, res, next) => {
       posts: documents
     });
   });
-
 });
 
 // export this app
