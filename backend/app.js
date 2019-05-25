@@ -33,8 +33,9 @@ app.post( "/api/posts", (req, res, next) => {
     content: req.body.content
   });
   // save data to DB
-  post.save();
-  res.status(201).json( {message: 'Post added successfully'}); // add new resource and return 201
+  post.save().then(createPost => {
+    res.status(201).json({message: 'Post added successfully', postId: createPost._id}); // add new resource and return 201
+  });
 });
 
 // client send request and waiting for such a response
