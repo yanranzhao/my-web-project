@@ -1,10 +1,18 @@
 // import express package
 const express = require('express');
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 const Post = require('./models/posts');
 
 const app = express();
+
+mongoose.connect("mongodb+srv://admin:0rIU4mOIuKLZpWvF@cluster0-53pve.mongodb.net/test?retryWrites=true")
+  .then( () => {
+  console.log('Connected to database');
+  }).catch( () => {
+  console.log('Connection failed');
+  });
 
 // all incoming requests
 app.use(bodyParser.json());
