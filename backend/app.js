@@ -39,14 +39,14 @@ app.post( "/api/posts", (req, res, next) => {
 
 // client send request and waiting for such a response
 app.get( "/api/posts", (req, res, next) => {
-  const posts = [
-    { id: 'fadf124211', title: 'First server-side post', content: 'This is from server'},
-    { id: 'sdfasd124211', title: 'Second server-side post', content: 'This is from server'}
-  ];
-  res.status(200).json({
-    message: 'Posts fetched successfully!',
-    posts: posts
-  }); // return json file
+  // fetch data from post collection. find() return all entries
+  Post.find().then( documents => {
+    res.status(200).json({
+      message: 'Posts fetched successfully!',
+      posts: documents
+    });
+  });
+
 });
 
 // export this app
