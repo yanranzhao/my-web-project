@@ -1,0 +1,7 @@
+
+
+Connect MongoDB
+npm install --save mongoose
+
+Checking MongoDB for new adding data:
+go to mongodb cloud -> conntect -> connect with mongo shell -> i have installed -> mongo "mongodb+srv://cluster0-53pve.mongodb.net/test" --username admin -> copy password for mongodb -> use node-angular -> show collections -> db.posts.find()
