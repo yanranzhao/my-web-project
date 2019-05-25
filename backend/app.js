@@ -1,7 +1,13 @@
 // import express package
 const express = require('express');
+const bodyParser = require("body-parser");
 
 const app = express();
+
+// all incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded( { extended: false } ));
+
 
 // add a middleware -- header
 app.use( (req, res, next) => {
@@ -11,8 +17,14 @@ app.use( (req, res, next) => {
     next();
 })
 
+app.post( "/api/posts", (req, res, next) => {
+  const post = req.body;
+  console.log(post);
+  res.status(201).json( {message: 'Post added successfully'}); // add new resource and return 201
+});
+
 // client send request and waiting for such a response
-app.use('/api/posts', (req, res, next) => {
+app.get( "/api/posts", (req, res, next) => {
   const posts = [
     { id: 'fadf124211', title: 'First server-side post', content: 'This is from server'},
     { id: 'sdfasd124211', title: 'Second server-side post', content: 'This is from server'}
