@@ -1,4 +1,7 @@
 
+Start Angular and NodeJs
+ng serve
+npm run start:server
 
 Connect MongoDB
 npm install --save mongoose

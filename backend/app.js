@@ -7,7 +7,7 @@ const Post = require('./models/posts');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://admin:0rIU4mOIuKLZpWvF@cluster0-53pve.mongodb.net/node-angular?retryWrites=true")
+mongoose.connect("mongodb+srv://admin:0rIU4mOIuKLZpWvF@cluster0-53pve.mongodb.net/node-angular?retryWrites=true", { useNewUrlParser: true })
   .then( () => {
   console.log('Connected to database');
   }).catch( () => {
